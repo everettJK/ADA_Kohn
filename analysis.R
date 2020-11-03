@@ -155,7 +155,7 @@ x <- group_by(d, nearestFeature) %>%
 
 w <- setNames(x$n, x$nearestFeature)
 
-
+names(w) <- sub('\\-AS1', '', names(w))
      
 png(file = 'wordCloud_allSubjects_nSites.png', res = 150)
 wordcloud(names(w), w, random.order=FALSE, colors=colorRampPalette(brewer.pal(12, "Paired"))(maxWordCloudWords), 
