@@ -85,7 +85,8 @@ abundantClonesPlots <- lapply(split(abundantClones, abundantClones$patient), fun
   
   x$posidLabel <- factor(x$posidLabel, levels = c('LowAbund', unique(o$posidLabel)))
   x <- x[order(x$timePointDays),]
-  x$timePoint  <- factor(x$timePoint) # , levels = (unique(d$timePoint))) 
+
+  x$timePoint  <- factor(x$timePoint, levels = (unique(x$timePoint))) 
  
   totalCellLabel <- unname(unlist(lapply(split(x, x$timePoint), function(x) ppNum(x$totalCells[1]))))
   
