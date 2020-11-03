@@ -135,12 +135,38 @@ x <- x[1:maxWordCloudWords,]
 w <- setNames(x$estAbund, x$nearestFeature)
 w <- w[! is.na(w)]
 
-png(file = 'wordCloud_allSubjects.png', res = 150)
+png(file = 'wordCloud_allSubjects_estAbund.png', res = 150)
 wordcloud(names(w), w, random.order=FALSE, colors=colorRampPalette(brewer.pal(12, "Paired"))(maxWordCloudWords), 
           rot.per=0, max.words = maxWordCloudWords, scale = c(2.5, 0.15))
 dev.off()
 
-pdf(file = 'wordCloud_allSubjects.pdf')
+pdf(file = 'wordCloud_allSubjects_estAbund.pdf')
 wordcloud(names(w), w, random.order=FALSE, colors=colorRampPalette(brewer.pal(12, "Paired"))(maxWordCloudWords), 
           rot.per=0, max.words = maxWordCloudWords, scale = c(2.5, 0.15))
 dev.off()
+
+
+
+x <- group_by(d, nearestFeature) %>%
+     summarise(n = n_distinct(posid)) %>%
+     ungroup() %>%
+     arrange(desc(n)) %>%
+     dplyr::slice(1:100)
+
+w <- setNames(x$n, x$nearestFeature)
+
+
+     
+png(file = 'wordCloud_allSubjects_nSites.png', res = 150)
+wordcloud(names(w), w, random.order=FALSE, colors=colorRampPalette(brewer.pal(12, "Paired"))(maxWordCloudWords), 
+          rot.per=0, max.words = maxWordCloudWords, scale = c(2.5, 0.25))
+dev.off()
+
+pdf(file = 'wordCloud_allSubjects_nSites.pdf')
+wordcloud(names(w), w, random.order=FALSE, colors=colorRampPalette(brewer.pal(12, "Paired"))(maxWordCloudWords), 
+          rot.per=0, max.words = maxWordCloudWords, scale = c(2.5, 0.25))
+dev.off()
+
+
+
+
