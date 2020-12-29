@@ -19,6 +19,15 @@ if(! file.exists('sites.rds')){
   intSites <- readRDS('sites.rds')
 }
 
+# SRA file check
+# f <- system('find /home/everett/data/BushmanGeneTherapy/demultiplexedINSPIIREDsamples -name GTSP*', intern = TRUE)
+# m <- unique(unlist(str_match_all(f, 'GTSP\\d+')))
+# group_by(data.frame(intSites), GTSP) %>%
+#   summarise(patient = patient[1], timePoint = timePoint[1], cellType = cellType[1], readsAvail = GTSP[1] %in% m) %>%
+#   ungroup()
+#
+
+
 d <- data.frame(intSites)
 d$patient <- sub('^p', '', d$patient)
 d$cellType <- gsub('^\\s+|\\s+$', '', toupper(d$cellType))
